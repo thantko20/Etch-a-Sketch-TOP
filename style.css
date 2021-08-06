@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #c4c4c4;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-family: 'WindSong', cursive;
+    padding-top: .5em;
+}
+
+.sketchContainer {
+    background-color: transparent;
+    width: 500px;
+    margin: 50px auto;
+
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+}
+
+@media only screen and (max-width:500px){
+    .sketchContainer {
+        width: 95%;
+    }
+}
+
+.pixel {
+    /*background-color: black;*/
+    border: .5px solid rgba(97, 97, 97, 0.315);
+    background-clip: padding-box;
+    aspect-ratio: 1;
+    transition: 0.2s;
+}
+
+.buttons {
+    margin: auto;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+button {
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+}
