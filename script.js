@@ -1,16 +1,17 @@
 const container = document.querySelector('.sketchContainer');
 const reset = document.getElementById('reset');
-let input = document.getElementById('color');
-
+const input = document.getElementById('color');
+const random = document.querySelector('.random');
+// Execute the function
 main();
 
 function main(){
     input.value = 'black';
     createGrid();
-
+    // Listen for reset button and ask the grid size
     reset.addEventListener('click', function(){
         const children = document.querySelectorAll('.pixel');
-        children.forEach(child => child.remove());
+        children.forEach(child => child.remove()); // Remove the existing grid
 
         let size = 0;
         let q = 0;
@@ -21,14 +22,22 @@ function main(){
 
         size = q;
 
-        createGrid(size);
+        createGrid(size); // Create a new grid with user's desired size
     })
-
+    // Color Picker
     input.addEventListener('change', function(){
         draw(input.value);
     })
+    // Random color picker
+    random.addEventListener('click', function(){
+        const randomColor = generateRandomColor();
+        random.style.color = randomColor;
+        random.style.textShadow = `0 0 3px black, 0 0 7px ${randomColor}`;
+        draw(randomColor);
+    })
 }
 
+// Create the grid with CSS Grid
 function createGrid(size=16) {   
     container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
 
@@ -40,11 +49,22 @@ function createGrid(size=16) {
     draw();
 }
 
-function draw(color='black'){
+// Draw on mouse hovering on grid
+function draw(color){
     const hovered = document.querySelectorAll('.pixel');
     hovered.forEach(pixel => {
         pixel.addEventListener('mouseover',function() {
             pixel.style.backgroundColor = color;
         })
     })
+
 }
+
+function generateRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
