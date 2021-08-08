@@ -2,6 +2,7 @@ const container = document.querySelector('.sketchContainer');
 const reset = document.getElementById('reset');
 const input = document.getElementById('color');
 const random = document.querySelector('.random');
+const rainbow = document.querySelector('.rainbow');
 // Execute the function
 main();
 
@@ -35,6 +36,8 @@ function main(){
         random.style.textShadow = `0 0 3px black, 0 0 7px ${randomColor}`;
         draw(randomColor);
     })
+    // Draw random color for each pixel
+    drawRainbow();
 }
 
 // Create the grid with CSS Grid
@@ -53,11 +56,10 @@ function createGrid(size=16) {
 function draw(color){
     const hovered = document.querySelectorAll('.pixel');
     hovered.forEach(pixel => {
-        pixel.addEventListener('mouseover',function() {
+        pixel.addEventListener('mouseenter',function() {
             pixel.style.backgroundColor = color;
         })
     })
-
 }
 
 function generateRandomColor() {
@@ -67,4 +69,15 @@ function generateRandomColor() {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
+}
+// Let's go colorful
+function drawRainbow() {
+    rainbow.addEventListener('click', function() {
+        const rainbowPixel = document.querySelectorAll('.pixel');
+        rainbowPixel.forEach(pixel => {
+            pixel.addEventListener('mouseenter',function() {
+                pixel.style.backgroundColor = generateRandomColor();
+            })
+        })
+    })
+}
